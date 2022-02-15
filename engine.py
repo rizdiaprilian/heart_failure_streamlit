@@ -50,7 +50,7 @@ class Random_Forest(LearnerInfo):
                                 class_weight="balanced", n_jobs=-1, 
                                 n_estimators=n_estimators, max_depth=max_depth, 
                                 max_samples=max_samples)
-
+### class learning SVM 
 @dataclass
 class SVM(LearnerInfo):
     """Learning data and make prediction with kernel-based method, SVM"""
