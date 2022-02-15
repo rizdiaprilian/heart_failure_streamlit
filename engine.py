@@ -63,6 +63,7 @@ class SVM(LearnerInfo):
         return SVC(C=C, max_iter=max_iter, kernel=kernel, 
                  probability=True, class_weight="balanced", random_state=42)
 
+### Adding user control on parameter setting for learner
 def classification(classifier, X_train, y_train, X_test, y_test):
     if classifier == "Logistic Regression":
         model = Logistic_Regression(LearnerName.logreg)
