@@ -65,6 +65,7 @@ class SVM(LearnerInfo):
 
 ### Adding user control on parameter setting for learner
 def classification(classifier, X_train, y_train, X_test, y_test):
+    ## If Logistic Regression is selected
     if classifier == "Logistic Regression":
         model = Logistic_Regression(LearnerName.logreg)
         C = st.sidebar.number_input("Regularization parameter", 0.01, 10.0, step=0.01, key='C')
@@ -74,7 +75,8 @@ def classification(classifier, X_train, y_train, X_test, y_test):
         algo_lr.fit(X_train, y_train)
         y_predict = algo_lr.predict(X_test)
         y_prob = algo_lr.predict_proba(X_test)
-
+    
+    ## If SVM is selected
     elif classifier == LearnerName.svm:
         model = SVM("Support Vector Machine")
         C = st.sidebar.number_input("Regularization parameter (C)", 0.01, 10.0, step=0.01, key='C')
