@@ -36,6 +36,7 @@ class Logistic_Regression(LearnerInfo):
                               C = C, class_weight="balanced", n_jobs=-1, 
                               max_iter= max_iter)
 
+### class learning RandomForest
 @dataclass
 class Random_Forest(LearnerInfo):
     """Learning data and make prediction with tree-based method, Random Forest"""
