@@ -101,7 +101,8 @@ def main():
     
     X_train, y_train, X_test, y_test = building_models(df)
 
-    classifier = st.sidebar.selectbox("Classifier", ("Random Forest", "Support Vector Machine", "Logistic Regression"))
+    classifier = st.sidebar.selectbox("Classifier", ("Random Forest", "Support Vector Machine",
+                                         "Logistic Regression","Gradient Boosting"))
     
     y_predict, y_prob = classification(classifier, X_train, y_train, X_test, y_test)
     precision, recall, fscore, accuracy, tnr, npv, conf_matrix_array = make_prediction(y_test, y_predict)
