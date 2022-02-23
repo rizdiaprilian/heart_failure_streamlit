@@ -6,7 +6,7 @@ from dataclasses import dataclass
 from typing import List
 from typing import Optional
 
-from sklearn.ensemble import RandomForestClassifier
+from sklearn.ensemble import RandomForestClassifier, GradientBoostingClassifier
 from sklearn.linear_model import LogisticRegression
 from sklearn.svm import SVC
 from enum import Enum
@@ -17,6 +17,7 @@ class LearnerName(str, Enum):
     logreg = "Logistic Regression"
     svm = "Support Vector Machine"
     randomforest = "Random Forest"
+    gradient_boost = "Gradient Boosting"
 
 ### Learning information
 @dataclass
@@ -63,6 +64,19 @@ class SVM(LearnerInfo):
         return SVC(C=C, max_iter=max_iter, kernel=kernel, 
                  probability=True, class_weight="balanced", random_state=42)
 
+### class learning Gradient Boosting 
+@dataclass
+class GBM(LearnerInfo):
+    """Learning data and make prediction with boosting"""
+
+    learning_rate: Optional[float] = None
+    n_estimators: Optional[int] = None
+    max_depth: Optional[int] = None
+
+    def create_algorithm(self, learning_rate, n_estimators, max_depth):
+        return GradientBoostingClassifier(learning_rate=learning_rate, n_estimators=n_estimators,
+                max_depth=max_depth, random_state=42)
+
 ### Adding user control on parameter setting for learner
 def classification(classifier, X_train, y_train, X_test, y_test):
     ## If Logistic Regression is selected
@@ -100,6 +114,18 @@ def classification(classifier, X_train, y_train, X_test, y_test):
         y_predict = algo_rf.predict(X_test)
         y_prob = algo_rf.predict_proba(X_test)
 
+    elif classifier == "Gradient Boosting":
+        model = GBM(LearnerName.gradient_boost)
+        learning_rate = st.sidebar.slider('Learning_rate', 
+                        value=1.0, min_value=0.01, max_value=10.0, step=0.05)
+        n_estimators = st.sidebar.slider('n_estimators', 
+                        value=100, min_value=10, max_value=500, step=10)
+        max_depth = st.sidebar.slider('max_depth', 
+                        value=4, min_value=2, max_value=16, step=2)
+        algo_gb = model.create_algorithm(learning_rate, n_estimators, max_depth)
+        algo_gb.fit(X_train, y_train)
+        y_predict = algo_gb.predict(X_test)
+        y_prob = algo_gb.predict_proba(X_test)
 
     return y_predict, y_prob
 

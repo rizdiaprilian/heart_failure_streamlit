@@ -20,10 +20,9 @@ from sklearn.metrics import roc_curve, roc_auc_score
 
 import plotly.express as px
 import plotly.figure_factory as ff
-# from classification_engine import classification
 from classifier_curves import eval_curves
 from engine import classification, make_prediction
-from engine import LearnerName, LearnerInfo, Logistic_Regression
+# from engine import LearnerName, LearnerInfo, Logistic_Regression
 
 
 
