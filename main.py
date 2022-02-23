@@ -13,9 +13,6 @@ import pandas as pd
 import seaborn as sns
 from sklearn.model_selection import train_test_split
 
-import psycopg2
-from psycopg2 import Error
-
 from sklearn.pipeline import Pipeline
 from sklearn.compose import ColumnTransformer
 from sklearn.preprocessing import OneHotEncoder, StandardScaler, LabelEncoder
