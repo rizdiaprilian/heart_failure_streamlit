@@ -15,6 +15,10 @@ from sklearn import metrics
 def load_pickle():
     """
     Loading pickle files of trained models and data suitable for evaluation
+    Argument: None
+    Returns:
+      trained_models: a pickle file with learned parameters
+      X_train, y_train, X_test, y_test: examples and test in tabular format
     """
     trained_models = pickle.load(open('base_models.p', 'rb'))
     X_train, y_train, X_test, y_test = pickle.load(open('training_splits.p', 'rb')).values()
